@@ -26,6 +26,13 @@ config = configparser.ConfigParser()
 # Read the config.toml file
 config.read('.streamlit/config.toml')
 
+hide_streamlit_style = """
+            <style>
+            footer {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
+
 def run():
     st.set_page_config(
         page_title="MLC Data Apps",
@@ -35,6 +42,7 @@ def run():
     if "example" in st.query_params:
         if st.query_params["example"] == "5":
             show_app_example()
-
+    else:
+        st.write("Keine App ausgewählt")
 if __name__ == "__main__":
     run()
