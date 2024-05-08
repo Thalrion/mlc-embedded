@@ -15,10 +15,23 @@
 import streamlit as st
 from streamlit.logger import get_logger
 import configparser
+from pathlib import Path
 
 from modules.example import show_app as show_app_example
 
 LOGGER = get_logger(__name__)
+
+# Path to the directory where images are stored
+static_dir = Path(__file__).parent / 'static' 
+
+# Path to favicon
+favicon_path = static_dir / 'Merz_Lifecare_Signet_Screen.png'
+
+st.set_page_config(
+    page_title="MLC Data View",
+    page_icon=str(favicon_path),
+    layout="wide",
+)
 
 # Create a ConfigParser object
 config = configparser.ConfigParser()
@@ -34,10 +47,6 @@ hide_streamlit_style = """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
 
 def run():
-    st.set_page_config(
-        page_title="MLC Data Apps",
-        page_icon="👋",
-    )
 
     if "example" in st.query_params:
         if st.query_params["example"] == "5":
