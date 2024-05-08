@@ -39,12 +39,21 @@ config = configparser.ConfigParser()
 # Read the config.toml file
 config.read('.streamlit/config.toml')
 
-hide_streamlit_style = """
-            <style>
-            footer {visibility: hidden;}
-            </style>
-            """
-st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
+hide_footer_style = """
+<style>
+.css-1lcbmhc {
+    visibility: hidden;
+}
+.css-1s9zz97 {
+    visibility: hidden;
+}
+.css-hi6a2p {
+    padding: 0rem;
+}
+</style>
+"""
+
+st.markdown(hide_footer_style, unsafe_allow_html=True)
 
 def run():
 
