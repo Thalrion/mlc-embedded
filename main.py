@@ -12,17 +12,29 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import inspect
-import textwrap
-
 import streamlit as st
+from streamlit.logger import get_logger
+import configparser
 
+from modules.example import show_app as show_app_example
 
-def show_code(demo):
-    """Showing the code of the demo."""
-    show_code = st.sidebar.checkbox("Show code", True)
-    if show_code:
-        # Showing the code of the demo.
-        st.markdown("## Code")
-        sourcelines, _ = inspect.getsourcelines(demo)
-        st.code(textwrap.dedent("".join(sourcelines[1:])))
+LOGGER = get_logger(__name__)
+
+# Create a ConfigParser object
+config = configparser.ConfigParser()
+
+# Read the config.toml file
+config.read('.streamlit/config.toml')
+
+def run():
+    st.set_page_config(
+        page_title="MLC Data Apps",
+        page_icon="👋",
+    )
+
+    if "example" in st.query_params:
+        if st.query_params["example"] == "5":
+            show_app_example()
+
+if __name__ == "__main__":
+    run()
